@@ -241,7 +241,7 @@
     if (state.over || !state.present[i]) return;
     clearHints();
 
-    if (!isFree(i, state.present)) { flashBlocked(i); return; }
+    if (!isFree(i, state.present)) { flashBlocked(i); Sound.play('blocked'); return; }
     if (!state.startedAt) state.startedAt = Date.now();
 
     const sel = state.selected;

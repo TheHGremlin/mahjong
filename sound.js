@@ -98,6 +98,12 @@ const Sound = (() => {
       noise({ dur: 0.06, vol: 0.25, type: 'lowpass', freq: 700 });
     },
 
+    // A short hiss: that tile can't be taken yet.
+    blocked() {
+      noise({ dur: 0.16, vol: 0.35, type: 'highpass', freq: 3500, q: 0.7 });
+      noise({ dur: 0.08, vol: 0.2, freq: 1200, q: 3 });
+    },
+
     // A bright little bell.
     match() {
       tone({ freq: 1568, dur: 0.6, vol: 0.22 });
