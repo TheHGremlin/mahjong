@@ -294,15 +294,29 @@ const Tiles = (() => {
     return ICONS[id][0];
   }
 
-  function svg(id) {
-    let body;
-    if (id.startsWith('gem')) body = gem(+id.slice(3));
-    else if (id.startsWith('shield')) body = shield(+id.slice(6));
-    else body = ICONS[id][1]();
-    // Icons are drawn with some breathing room; nudge them up a little to fill the tile.
-    return `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">` +
-      `<g transform="translate(30 40) scale(1.1) translate(-30 -40)">${body}</g></svg>`;
+  // Gems and Shields match anything in their family, so they get a gold frame
+  // and a caption to make that obvious on the board.
+  function isWild(id) {
+    return id.startsWith('gem') || id.startsWith('shield');
   }
 
-  return { QUAD_FACES, GEMS, SHIELDS, matchKey, label, svg };
+  function wildFrame(caption) {
+    return '<rect x="3" y="3" width="54" height="74" rx="5" fill="none" stroke="#c9a227" stroke-width="2.5"/>' +
+      `<text x="30" y="72" font-size="7.5" font-weight="bold" font-family="Arial, sans-serif" ` +
+      `fill="#8a6d12" text-anchor="middle">${caption}</text>`;
+  }
+
+  function svg(id) {
+    const open = `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">`;
+    if (isWild(id)) {
+      const isGem = id.startsWith('gem');
+      const body = isGem ? gem(+id.slice(3)) : shield(+id.slice(6));
+      return open + wildFrame(isGem ? 'ANY GEM' : 'ANY SHIELD') +
+        `<g transform="translate(30 35) scale(0.8) translate(-30 -40)">${body}</g></svg>`;
+    }
+    // Icons are drawn with some breathing room; nudge them up a little to fill the tile.
+    return open + `<g transform="translate(30 40) scale(1.1) translate(-30 -40)">${ICONS[id][1]()}</g></svg>`;
+  }
+
+  return { QUAD_FACES, GEMS, SHIELDS, matchKey, isWild, label, svg };
 })();

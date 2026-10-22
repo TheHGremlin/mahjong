@@ -173,6 +173,7 @@
       el.innerHTML = Tiles.svg(state.faces[i]);
       el.title = Tiles.label(state.faces[i]);
       el.classList.toggle('removed', !state.present[i]);
+      el.classList.toggle('wild', Tiles.isWild(state.faces[i]));
       el.classList.remove('selected', 'hint', 'blocked');
     }
   }
@@ -376,7 +377,7 @@
       <p>Clear the board by removing matching pairs of tiles.</p>
       <ul>
         <li>A tile can be removed only if nothing is on top of it <i>and</i> its left or right side is open.</li>
-        <li>Click a tile, then click its match. Any Gem matches any Gem; any Shield matches any Shield.</li>
+        <li>Click a tile, then click its match. Gold-framed tiles are wild within their family: <b>any Gem matches any Gem</b>, and <b>any Shield matches any Shield</b>.</li>
         <li>Each pair is worth ${POINTS_MATCH} points. A hint costs ${-POINTS_HINT}.</li>
       </ul>
       <p>Keys: <b>H</b> hint, <b>Ctrl+Z</b> undo, <b>N</b> new game.</p>`,
