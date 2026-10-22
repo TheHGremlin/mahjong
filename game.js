@@ -94,10 +94,10 @@
 
       const pairs = [];
       for (const face of Tiles.QUAD_FACES) pairs.push([face, face], [face, face]);
-      const flowers = shuffle(Tiles.FLOWERS.slice(), rng);
-      const seasons = shuffle(Tiles.SEASONS.slice(), rng);
-      pairs.push([flowers[0], flowers[1]], [flowers[2], flowers[3]]);
-      pairs.push([seasons[0], seasons[1]], [seasons[2], seasons[3]]);
+      const gems = shuffle(Tiles.GEMS.slice(), rng);
+      const shields = shuffle(Tiles.SHIELDS.slice(), rng);
+      pairs.push([gems[0], gems[1]], [gems[2], gems[3]]);
+      pairs.push([shields[0], shields[1]], [shields[2], shields[3]]);
       shuffle(pairs, rng);
 
       const faces = new Array(COUNT);
@@ -376,7 +376,7 @@
       <p>Clear the board by removing matching pairs of tiles.</p>
       <ul>
         <li>A tile can be removed only if nothing is on top of it <i>and</i> its left or right side is open.</li>
-        <li>Click a tile, then click its match. Any Flower matches any Flower; any Season matches any Season.</li>
+        <li>Click a tile, then click its match. Any Gem matches any Gem; any Shield matches any Shield.</li>
         <li>Each pair is worth ${POINTS_MATCH} points. A hint costs ${-POINTS_HINT}.</li>
       </ul>
       <p>Keys: <b>H</b> hint, <b>Ctrl+Z</b> undo, <b>N</b> new game.</p>`,

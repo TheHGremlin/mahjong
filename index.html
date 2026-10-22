@@ -7,37 +7,33 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="window">
-    <div class="titlebar">
-      <span class="title">Mahjong</span>
+  <header class="topbar">
+    <h1>Mahjong</h1>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-label">Game</span><span id="st-game">—</span></div>
+      <div class="stat"><span class="stat-label">Tiles</span><span id="st-tiles">144</span></div>
+      <div class="stat"><span class="stat-label">Score</span><span id="st-score">0</span></div>
+      <div class="stat"><span class="stat-label">Time</span><span id="st-time">0:00</span></div>
     </div>
 
-    <div class="toolbar">
-      <button id="btn-new" title="New game (N)">New Game</button>
-      <button id="btn-select" title="Play a specific game number">Select Game…</button>
-      <button id="btn-restart" title="Start this game over">Restart</button>
-      <span class="sep"></span>
+    <nav class="actions">
       <button id="btn-undo" title="Take back the last pair (Ctrl+Z)">Undo</button>
       <button id="btn-hint" title="Show a matching pair (H) — costs points">Hint</button>
-      <span class="sep"></span>
-      <button id="btn-help" title="How to play">Help</button>
-    </div>
+      <button id="btn-restart" title="Start this game over">Restart</button>
+      <button id="btn-select" title="Play a specific game number">Game #</button>
+      <button id="btn-new" class="primary" title="New game (N)">New Game</button>
+      <button id="btn-help" class="icon" title="How to play" aria-label="How to play">?</button>
+    </nav>
+  </header>
 
-    <main id="stage">
-      <div id="board"></div>
-    </main>
-
-    <div class="statusbar">
-      <div class="cell">Game <span id="st-game">—</span></div>
-      <div class="cell">Tiles left: <span id="st-tiles">144</span></div>
-      <div class="cell">Score: <span id="st-score">0</span></div>
-      <div class="cell">Time: <span id="st-time">0:00</span></div>
-    </div>
-  </div>
+  <main id="stage">
+    <div id="board"></div>
+  </main>
 
   <div id="dialog-backdrop" hidden>
     <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-title">
-      <div class="titlebar"><span class="title" id="dlg-title"></span></div>
+      <h2 id="dlg-title"></h2>
       <div class="dialog-body" id="dlg-body"></div>
       <div class="dialog-buttons" id="dlg-buttons"></div>
     </div>
