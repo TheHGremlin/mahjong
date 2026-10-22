@@ -294,25 +294,25 @@ const Tiles = (() => {
     return ICONS[id][0];
   }
 
-  // Gems and Shields match anything in their family, so they get a gold frame
-  // and a caption to make that obvious on the board.
+  // Gems and Shields match anything in their family. Each family shares a small
+  // corner mark (a sparkle for Gems, a tiny sword for Shields) as a quiet hint.
   function isWild(id) {
     return id.startsWith('gem') || id.startsWith('shield');
   }
 
-  function wildFrame(caption) {
-    return '<rect x="3" y="3" width="54" height="74" rx="5" fill="none" stroke="#c9a227" stroke-width="2.5"/>' +
-      `<text x="30" y="72" font-size="7.5" font-weight="bold" font-family="Arial, sans-serif" ` +
-      `fill="#8a6d12" text-anchor="middle">${caption}</text>`;
-  }
+  const GEM_MARK = `<polygon points="${starPoints(51, 10, 7, 2, 4)}" fill="#f9a825" stroke="#2b2b2b" stroke-width="0.8" stroke-linejoin="round"/>`;
+
+  const SHIELD_MARK =
+    '<polygon points="9,58 11,61 11,70 7,70 7,61" fill="#e0e6ea" stroke="#2b2b2b" stroke-width="0.8" stroke-linejoin="round"/>' +
+    '<rect x="4.5" y="70" width="9" height="2" rx="1" fill="#fbc02d" stroke="#2b2b2b" stroke-width="0.6"/>' +
+    '<rect x="8" y="72" width="2" height="4" fill="#5d4037"/>';
 
   function svg(id) {
     const open = `<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">`;
     if (isWild(id)) {
       const isGem = id.startsWith('gem');
       const body = isGem ? gem(+id.slice(3)) : shield(+id.slice(6));
-      return open + wildFrame(isGem ? 'ANY GEM' : 'ANY SHIELD') +
-        `<g transform="translate(30 35) scale(0.8) translate(-30 -40)">${body}</g></svg>`;
+      return open + body + (isGem ? GEM_MARK : SHIELD_MARK) + '</svg>';
     }
     // Icons are drawn with some breathing room; nudge them up a little to fill the tile.
     return open + `<g transform="translate(30 40) scale(1.1) translate(-30 -40)">${ICONS[id][1]()}</g></svg>`;

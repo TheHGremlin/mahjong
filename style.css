@@ -142,8 +142,6 @@ button.icon { width: 36px; padding: 7px 0; }
 
 .tile svg { display: block; width: 100%; height: 100%; padding: 2px; pointer-events: none; }
 
-.tile.wild { background: #f6edcf; }
-
 .tile.selected { background: #ffe27a; }
 
 .tile.hint { animation: hint-pulse 0.6s ease-in-out 4; }
