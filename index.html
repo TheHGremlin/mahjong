@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mahjong</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <span class="title">Mahjong</span>
+    </div>
+
+    <div class="toolbar">
+      <button id="btn-new" title="New game (N)">New Game</button>
+      <button id="btn-select" title="Play a specific game number">Select Game…</button>
+      <button id="btn-restart" title="Start this game over">Restart</button>
+      <span class="sep"></span>
+      <button id="btn-undo" title="Take back the last pair (Ctrl+Z)">Undo</button>
+      <button id="btn-hint" title="Show a matching pair (H) — costs points">Hint</button>
+      <span class="sep"></span>
+      <button id="btn-help" title="How to play">Help</button>
+    </div>
+
+    <main id="stage">
+      <div id="board"></div>
+    </main>
+
+    <div class="statusbar">
+      <div class="cell">Game <span id="st-game">—</span></div>
+      <div class="cell">Tiles left: <span id="st-tiles">144</span></div>
+      <div class="cell">Score: <span id="st-score">0</span></div>
+      <div class="cell">Time: <span id="st-time">0:00</span></div>
+    </div>
+  </div>
+
+  <div id="dialog-backdrop" hidden>
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-title">
+      <div class="titlebar"><span class="title" id="dlg-title"></span></div>
+      <div class="dialog-body" id="dlg-body"></div>
+      <div class="dialog-buttons" id="dlg-buttons"></div>
+    </div>
+  </div>
+
+  <script src="tiles.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
