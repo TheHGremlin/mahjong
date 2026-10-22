@@ -18,7 +18,7 @@ Remove all tiles by clicking matching pairs. A tile can be removed only if nothi
 | Hint | −20 |
 | Undo | takes back the pair's points |
 
-Keyboard: **H** hint, **Ctrl+Z** undo, **N** new game, **Esc** deselect.
+Keyboard: **H** hint, **Ctrl+Z** undo, **N** new game, **M** sound on/off, **Esc** deselect.
 
 ## Running it
 
@@ -35,4 +35,5 @@ then open <http://localhost:8000>. It can also be hosted as-is on GitHub Pages.
 - `index.html` — page structure
 - `style.css` — page and tile styling
 - `tiles.js` — SVG artwork for each tile face
+- `sound.js` — sound effects, synthesized with the Web Audio API
 - `game.js` — layout, dealing, rules, scoring and UI

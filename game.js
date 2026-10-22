@@ -245,12 +245,13 @@
     if (!state.startedAt) state.startedAt = Date.now();
 
     const sel = state.selected;
-    if (sel === i) { select(-1); return; }
+    if (sel === i) { select(-1); Sound.play('deselect'); return; }
     if (sel >= 0 && Tiles.matchKey(state.faces[sel]) === Tiles.matchKey(state.faces[i])) {
       removePair(sel, i);
       return;
     }
     select(i);
+    Sound.play('select');
   }
 
   function removePair(a, b) {
@@ -261,6 +262,7 @@
     state.history.push({ a, b });
     state.score += POINTS_MATCH;
     renderStatus();
+    Sound.play('match');
     checkEnd();
   }
 
@@ -310,6 +312,7 @@
     }
     state.score += POINTS_HINT;
     renderStatus();
+    Sound.play('hint');
   }
 
   function checkEnd() {
@@ -317,6 +320,7 @@
       state.over = true;
       state.finishedAt = Date.now();
       renderTime();
+      Sound.play('win');
       showDialog('You win!', `
         <p>You cleared Game #${state.game} in ${$('st-time').textContent}.</p>
         <p>Final score: <b>${state.score}</b></p>`,
@@ -325,6 +329,7 @@
     }
     if (availablePairs().length === 0) {
       state.over = true;
+      Sound.play('lose');
       showDialog('No more moves', `
         <p>There are no matching pairs left to remove.</p>
         <p>Every game can be won — try backing up a few moves or starting over.</p>`,
@@ -378,7 +383,7 @@
         <li>Click a tile, then click its match. <b>Any Gem matches any Gem</b> (look for the sparkle in the corner), and <b>any Shield matches any Shield</b> (look for the tiny sword).</li>
         <li>Each pair is worth ${POINTS_MATCH} points. A hint costs ${-POINTS_HINT}.</li>
       </ul>
-      <p>Keys: <b>H</b> hint, <b>Ctrl+Z</b> undo, <b>N</b> new game.</p>`,
+      <p>Keys: <b>H</b> hint, <b>Ctrl+Z</b> undo, <b>N</b> new game, <b>M</b> sound on/off.</p>`,
       [['OK']]);
   }
 
@@ -407,8 +412,26 @@
     const k = e.key.toLowerCase();
     if (k === 'h') hint();
     else if (k === 'n') newGame(randomGameNumber());
-    else if (e.key === 'Escape') select(-1);
+    else if (k === 'm') toggleMute();
+    else if (e.key === 'Escape' && state.selected >= 0) { select(-1); Sound.play('deselect'); }
   });
+
+  const muteBtn = $('btn-mute');
+
+  function renderMute() {
+    const muted = Sound.isMuted();
+    muteBtn.textContent = muted ? '🔇' : '🔊';
+    muteBtn.title = muted ? 'Sound off (M)' : 'Sound on (M)';
+    muteBtn.setAttribute('aria-pressed', String(muted));
+  }
+
+  function toggleMute() {
+    Sound.setMuted(!Sound.isMuted());
+    renderMute();
+  }
+
+  muteBtn.addEventListener('click', toggleMute);
+  renderMute();
 
   window.addEventListener('resize', fitBoard);
   setInterval(renderTime, 1000);
