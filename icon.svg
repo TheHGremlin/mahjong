@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%">
+      <stop offset="0" stop-color="#1f3360"/>
+      <stop offset="1" stop-color="#0a1224"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- back tile -->
+  <rect x="134" y="114" width="196" height="252" rx="24" fill="#8f8566"/>
+  <rect x="122" y="102" width="196" height="252" rx="24" fill="#e6dec4" stroke="#5e5844" stroke-width="4"/>
+
+  <!-- front tile -->
+  <rect x="190" y="160" width="196" height="252" rx="24" fill="#8f8566"/>
+  <rect x="178" y="148" width="196" height="252" rx="24" fill="#f8f4e9" stroke="#5e5844" stroke-width="4"/>
+
+  <!-- gem with sparkle, drawn in the game's 60x80 tile coordinates -->
+  <g transform="translate(181.5 148) scale(3.15)" stroke-linejoin="round">
+    <polygon points="11,30 20,14 40,14 49,30 30,68" fill="#e53935" stroke="#2b2b2b" stroke-width="1.6"/>
+    <polygon points="20,14 40,14 36,30 24,30" fill="#ffcdd2"/>
+    <polygon points="11,30 24,30 30,68" fill="#ffcdd2" opacity="0.5"/>
+    <line x1="11" y1="30" x2="49" y2="30" stroke="#2b2b2b" stroke-width="1.2"/>
+    <polygon points="51,3 52.4,8.6 58,10 52.4,11.4 51,17 49.6,11.4 44,10 49.6,8.6" fill="#f9a825" stroke="#2b2b2b" stroke-width="0.8"/>
+  </g>
+</svg>

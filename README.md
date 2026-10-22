@@ -30,10 +30,19 @@ python -m http.server 8000
 
 then open <http://localhost:8000>. It can also be hosted as-is on GitHub Pages.
 
+## Installing on a phone
+
+The game can be added to a home screen and runs like an app, including offline.
+
+- **iPhone (Safari):** Share button → **Add to Home Screen**.
+- **Android (Chrome):** ⋮ menu → **Add to Home screen** or **Install app**.
+
 ## Files
 
 - `index.html` — page structure
 - `style.css` — page and tile styling
 - `tiles.js` — SVG artwork for each tile face
 - `sound.js` — sound effects, synthesized with the Web Audio API
+- `manifest.webmanifest`, `icon*.png`, `apple-touch-icon.png`, `icon.svg` — app name and icons for home-screen install
+- `sw.js` — service worker for offline play
 - `game.js` — layout, dealing, rules, scoring and UI
