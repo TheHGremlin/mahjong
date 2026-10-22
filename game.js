@@ -157,7 +157,7 @@
   }
 
   function fitBoard() {
-    const pad = 12;
+    const pad = Math.min(stage.clientWidth, stage.clientHeight) < 500 ? 4 : 12;
     const scale = Math.min(
       (stage.clientWidth - pad * 2) / BOARD_W,
       (stage.clientHeight - pad * 2) / BOARD_H,
@@ -432,6 +432,14 @@
 
   muteBtn.addEventListener('click', toggleMute);
   renderMute();
+
+  // "Turn your phone sideways" tip, shown on narrow portrait screens until dismissed.
+  const TIP_KEY = 'mahjong-rotate-tip-dismissed';
+  try { if (localStorage.getItem(TIP_KEY) === '1') document.body.classList.add('tip-dismissed'); } catch (e) { /* storage unavailable */ }
+  $('rotate-tip-close').addEventListener('click', () => {
+    document.body.classList.add('tip-dismissed');
+    try { localStorage.setItem(TIP_KEY, '1'); } catch (e) { /* storage unavailable */ }
+  });
 
   window.addEventListener('resize', fitBoard);
   setInterval(renderTime, 1000);

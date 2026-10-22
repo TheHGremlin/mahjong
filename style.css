@@ -223,9 +223,74 @@ button.icon { width: 36px; padding: 7px 0; }
   color: var(--accent-text);
 }
 
+/* ---------- Phone layouts ---------- */
+
+.ic { display: none; }
+
+#rotate-tip {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 14px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--panel-border);
+  color: #d5ddee;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+#rotate-tip button { width: 28px; padding: 3px 0; font-size: 12px; }
+
+/* Narrow screens: compact top bar with icon buttons. */
 @media (max-width: 700px) {
-  .topbar { padding: 10px 12px; gap: 8px 12px; }
-  .actions { margin-left: 0; }
-  button { padding: 6px 10px; }
-  .stat { padding: 4px 10px; }
+  .topbar { padding: 6px 8px; gap: 6px; }
+  h1 { display: none; }
+  .stats { width: 100%; gap: 4px; flex-wrap: nowrap; }
+  .stat { flex: 1; justify-content: center; padding: 3px 6px; gap: 4px; font-size: 13px; }
+  .stat-label { font-size: 10px; letter-spacing: 0.03em; }
+  .actions { width: 100%; margin-left: 0; gap: 4px; flex-wrap: nowrap; }
+  .actions button { flex: 1; min-width: 0; padding: 6px 0; }
+  .ic { display: inline; }
+  .label { display: none; }
+}
+
+@media (orientation: portrait) and (max-width: 700px) {
+  #rotate-tip { display: flex; }
+  body.tip-dismissed #rotate-tip { display: none; }
+}
+
+/* Phones held sideways: height is the scarce dimension, so move the
+   controls into a slim column on the left and give the board full height. */
+@media (orientation: landscape) and (max-height: 500px) {
+  body { flex-direction: row; }
+
+  .topbar {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: 116px;
+    flex-shrink: 0;
+    padding: 8px 6px;
+    gap: 8px;
+    border-bottom: none;
+    border-right: 1px solid var(--panel-border);
+    overflow-y: auto;
+  }
+
+  h1 { display: none; }
+
+  .stats { display: grid; grid-template-columns: 1fr; gap: 4px; width: auto; }
+  .stat { justify-content: space-between; padding: 3px 8px; border-radius: 8px; font-size: 13px; }
+
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; width: auto; margin: 0; }
+  .actions button { padding: 6px 0; }
+  #btn-new { grid-column: span 2; }
+
+  .ic { display: inline; }
+  .label { display: none; }
 }
